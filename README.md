@@ -354,6 +354,47 @@ Ao reportar um bug, inclua:
 4. Screenshots (se aplicável)
 5. Ambiente (navegador, OS, etc)
 
+## Arquitetura do Projeto
+
+- **App.js**: Componente principal da aplicação que renderiza o componente `SwaggerUI`.
+- **SwaggerUI.js**: Componente responsável por renderizar a interface do Swagger.
+
+### Configuração do Webpack
+
+A aplicação utiliza três arquivos de configuração do Webpack:
+
+- **webpack.common.js**: Contém a configuração comum usada tanto em desenvolvimento quanto em produção.
+- **webpack.dev.js**: Configuração específica para o ambiente de desenvolvimento.
+- **webpack.prod.js**: Configuração específica para o ambiente de produção.
+
+### Scripts do NPM
+
+- **start**: Inicia o servidor de desenvolvimento.
+- **build**: Gera o build de produção.
+- **test**: Executa os testes unitários com cobertura.
+- **predeploy**: Gera o build de produção antes do deploy.
+- **deploy**: Faz o deploy da aplicação para o GitHub Pages.
+
+### Testes
+
+Os testes são escritos utilizando o Jest e o React Testing Library. Os arquivos de teste estão localizados no mesmo diretório dos componentes que eles testam e seguem o padrão `*.test.js`.
+
+### Estilo
+
+A aplicação utiliza o Tailwind CSS para estilização. Os estilos são processados pelo PostCSS através do `postcss-loader` no Webpack.
+
+### Deploy
+
+O deploy da aplicação é feito automaticamente para o GitHub Pages utilizando o GitHub Actions. O workflow de deploy está configurado no arquivo `.github/workflows/deploy.yml`.
+
+Para suporte, entre em contato através das issues do GitHub ou envie um email para [seu-email@exemplo.com]
+
+## How to `deploy local`?
+
+```bash
+chmod +x local-deploy.sh
+```
+
 ## 📞 Suporte
 
 Para suporte, entre em contato através das issues do GitHub ou envie um email para [seu-email@exemplo.com]

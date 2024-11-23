@@ -6,7 +6,13 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/swagger-ui/', // Caminho do repositório no GitHub Pages
+    filename: '[name].[contenthash].js',
+    publicPath: '/swagger-ui/',
+    clean: true
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
 });

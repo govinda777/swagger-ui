@@ -1,1 +1,1 @@
-npm test && npm run deploy
+npm test && npm run build:dev

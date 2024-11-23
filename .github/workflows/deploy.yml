@@ -6,10 +6,16 @@ on:
       - main
   workflow_dispatch:
 
+# Estas permissões são necessárias para o deploy do GitHub Pages
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
+
+# Permite apenas uma execução simultânea
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:

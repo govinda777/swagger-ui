@@ -9,10 +9,5 @@ module.exports = merge(common, {
     filename: '[name].[contenthash].js',
     publicPath: '/swagger-ui/',
     clean: true
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+  }
 });

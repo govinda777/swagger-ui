@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -26,52 +24,18 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
-      - name: Debug Webpack configuration
-        run: |
-          echo "Webpack configs present:"
-          ls -la webpack.*.js
-
       - name: Install dependencies
-        run: |
-          npm ci
-          npm list webpack
-          npm list webpack-cli
+        run: npm ci
 
       - name: Build project
         run: |
-          echo "Running build..."
           npm run build
-          echo "Build completed. Checking dist folder:"
-          ls -la dist
+          # Create .nojekyll file to prevent GitHub Pages from ignoring files that begin with an underscore
+          touch dist/.nojekyll
 
-      # Verificar se o arquivo index.html foi gerado
-      - name: Check build output
-        run: |
-          if [ ! -f dist/index.html ]; then
-            echo "Error: dist/index.html not found!"
-            exit 1
-          fi
-          echo "Build artifacts:"
-          find dist -type f
-
-      - name: Setup Git config
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      # Usar o script de deploy que já está configurado no package.json
       - name: Deploy to GitHub Pages
-        run: |
-          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npm run deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      # Backup deploy method caso o npm run deploy falhe
-      - name: Deploy (Fallback)
-        if: failure()
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist
           branch: gh-pages
+          folder: dist
           clean: true

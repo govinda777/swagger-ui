@@ -6,27 +6,28 @@ on:
       - main
   workflow_dispatch:
 
-# Estas permissões são necessárias para o deploy do GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
-
-# Permite apenas uma execução simultânea
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history for potential Git operations
+
+      - name: Debug info
+        run: |
+          echo "Current directory contents:"
+          ls -la
+          echo "Node version:"
+          node -v || echo "Node not installed yet"
+          echo "Git status:"
+          git status
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -35,19 +36,28 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: |
+          echo "Installing dependencies..."
+          yarn install --frozen-lockfile
+          echo "Dependencies installed, listing node_modules:"
+          ls -la node_modules
 
       - name: Build project
-        run: yarn build
+        run: |
+          echo "Starting build..."
+          yarn build
+          echo "Build completed, listing dist directory:"
+          ls -la dist
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: './dist'
+          folder: dist
+          branch: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
+          clean: true
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - name: Show deployment result
+        run: |
+          echo "Deployment completed"
+          git branch --all

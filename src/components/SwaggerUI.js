@@ -24,7 +24,7 @@ const mockAPI = {
 const swaggerSpec = {
   openapi: "3.0.0",
   info: {
-    title: "API de Usuários Govinda Systems !",
+    title: "API de Usuários Govinda Systems !!!!",
     version: "1.0.0",
     description: "API de demonstração com documentação interativa"
   },

@@ -18,46 +18,42 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Fetch all history for potential Git operations
-
-      - name: Debug info
-        run: |
-          echo "Current directory contents:"
-          ls -la
-          echo "Node version:"
-          node -v || echo "Node not installed yet"
-          echo "Git status:"
-          git status
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '16'
-          cache: 'yarn'
+          cache: 'npm'  # Mudamos para npm em vez de yarn
+
+      - name: Debug environment
+        run: |
+          echo "Node version:"
+          node -v
+          echo "NPM version:"
+          npm -v
+          echo "Directory contents:"
+          ls -la
 
       - name: Install dependencies
         run: |
-          echo "Installing dependencies..."
-          yarn install --frozen-lockfile
-          echo "Dependencies installed, listing node_modules:"
+          npm ci
+          echo "Node modules:"
           ls -la node_modules
 
       - name: Build project
         run: |
-          echo "Starting build..."
-          yarn build
-          echo "Build completed, listing dist directory:"
-          ls -la dist
+          npm run build || {
+            echo "Build failed. Checking for errors..."
+            cat npm-debug.log || true
+            exit 1
+          }
+          echo "Build output:"
+          ls -la dist || true
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
           branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
           clean: true
-
-      - name: Show deployment result
-        run: |
-          echo "Deployment completed"
-          git branch --all

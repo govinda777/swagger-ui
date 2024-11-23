@@ -28,6 +28,8 @@ cd swagger-docs-demo
 
 2. Instale as dependências:
 ```bash
+npm install -g serve --registry=https://registry.npmjs.org/
+
 npm install --registry=https://registry.npmjs.org/
 
 npm install --save-dev @babel/preset-react @babel/preset-env  --registry=https://registry.npmjs.org/

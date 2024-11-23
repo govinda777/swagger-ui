@@ -3,29 +3,35 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - main # Dispara o workflow ao realizar push no branch main.
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # Faz o checkout do código do branch main
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Configura a versão do Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20' # Atualizado para usar Node.js 20, que é compatível com `react-router-dom`.
 
+      # Instala as dependências do projeto
       - name: Install dependencies
         run: yarn install
 
+      # Gera o build do projeto
       - name: Build project
         run: yarn build
 
+      # Faz o deploy para o branch `gh-pages`
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          branch: gh-pages
-          folder: dist
+          branch: gh-pages # Branch onde os arquivos serão publicados
+          folder: dist # Pasta gerada pelo build que será publicada
+          token: ${{ secrets.GITHUB_TOKEN }} # Token de autenticação para o deploy

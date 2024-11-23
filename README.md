@@ -1,4 +1,20 @@
+
 # swagger-ui
+
+[![Build and Deploy](https://github.com/govinda777/swagger-ui/actions/workflows/deploy.yml/badge.svg)](https://github.com/govinda777/swagger-ui/actions/workflows/deploy.yml)
+[![GitHub package.json version](https://img.shields.io/github/package-json/v/govinda777/swagger-ui)](https://github.com/govinda777/swagger-ui)
+[![GitHub top language](https://img.shields.io/github/languages/top/govinda777/swagger-ui)](https://github.com/govinda777/swagger-ui)
+[![Webpack](https://img.shields.io/badge/webpack-%5E5.96.1-8DD6F9?logo=webpack)](https://webpack.js.org/)
+[![React](https://img.shields.io/badge/react-%5E18.3.1-61DAFB?logo=react)](https://reactjs.org/)
+[![TailwindCSS](https://img.shields.io/badge/tailwindcss-%5E3.4.15-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![Jest](https://img.shields.io/badge/tested_with-jest-%23C21325?logo=jest)](https://jestjs.io/)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-deployed-success?logo=github)](https://govinda777.github.io/swagger-ui)
+[![Node](https://img.shields.io/badge/node-v20-brightgreen?logo=node.js)](https://nodejs.org)
+[![License](https://img.shields.io/npm/l/swagger-ui?color=blue)](https://github.com/govinda777/swagger-ui/blob/main/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Maintainability](https://api.codeclimate.com/v1/badges/your-repo-id/maintainability)](https://codeclimate.com/github/govinda777/swagger-ui)
+[![Known Vulnerabilities](https://snyk.io/test/github/govinda777/swagger-ui/badge.svg)](https://snyk.io/test/github/govinda777/swagger-ui)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 
 # Swagger UI Documentation Viewer
 

@@ -1,20 +1,14 @@
-const { merge } = require('webpack-merge');
-const common = require('./webpack.common.js');
+// webpack.prod.js
 const path = require('path');
+const { merge } = require('webpack-merge');
+const commonConfig = require('./webpack.common.js');
 
-module.exports = merge(common, {
+module.exports = merge(commonConfig, {
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: '/swagger-ui/',
+    publicPath: '/swagger-ui/', // Importante: deve corresponder ao nome do seu repo
     clean: true
-  },
-  optimization: {
-    minimize: true,
-    moduleIds: 'deterministic',
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
+  }
 });
